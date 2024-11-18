@@ -79,7 +79,6 @@ app.get("/books/:id", async (request, response) => {
 });
 
 // Update a book by id
-
 app.put("/books/:id", async (request, response) => {
   try {
     if (
@@ -99,6 +98,21 @@ app.put("/books/:id", async (request, response) => {
       return response.status(404).send({ message: "Book not found" });
     }
     return response.status(200).send({ message: "Book updated successfully" });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).send({ message: error.message });
+  }
+});
+
+// Delete a book by id
+app.delete("/books/:id", async (request, response) => {
+  try {
+    // Find a book by id and delete it
+    const book = await Book.findByIdAndDelete(request.params.id);
+    if (!book) {
+      return response.status(404).send({ message: "Book not found" });
+    }
+    return response.status(200).send({ message: "Book deleted successfully" });
   } catch (error) {
     console.log(error);
     return response.status(500).send({ message: error.message });
