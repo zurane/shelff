@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
 // import { BsInfoCircle } from "react-icons/bs";
@@ -41,13 +42,15 @@ const Home = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className="max-w-6xl mx-auto">
           <ul>
             {books.map((book) => (
-              <li key={book._id}>
-                {book.author} - {book.title} - {book.publishedYear} -
-                {book.genre}
-              </li>
+              <Link to={`/books/details/${book._id}`} key={book._id}>
+                <li>
+                  {book.author} - {book.title} - {book.publishedYear} -
+                  {book.genre}
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
