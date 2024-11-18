@@ -46,7 +46,7 @@ const Home = () => {
           <ul>
             {books.map((book) => (
               <Link to={`/books/details/${book._id}`} key={book._id}>
-                <li>
+                <li className="py-2 border-b">
                   {book.author} - {book.title} - {book.publishedYear} -
                   {book.genre}
                 </li>
