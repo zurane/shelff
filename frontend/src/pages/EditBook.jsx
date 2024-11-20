@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import { Modal, Box, Button, TextField, Typography } from "@mui/material";
 
-const EditBook = () => {
-  const { id } = useParams();
+const EditBook = ({ open, handleClose, bookId }) => {
   const navigate = useNavigate();
-  // Define the state variable book and the function to update it
   const [book, setBook] = useState({
     title: "",
     author: "",
@@ -18,7 +17,7 @@ const EditBook = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/books/${id}`) // Send a GET request to the server to fetch the book with the given id.
+      .get(`http://localhost:3000/books/${bookId}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
@@ -27,22 +26,22 @@ const EditBook = () => {
         console.log(error);
         setLoading(false);
       });
-  }, [id]);
+  }, [bookId]);
 
   const updateBook = (field, value) => {
     setBook((prevBook) => ({
-      ...prevBook, // Spread operator to copy the previous state of the book object.
-      [field]: value, // Update the field with the new value. The field is the key in the book object.
+      ...prevBook,
+      [field]: value,
     }));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior.
+    e.preventDefault();
     axios
-      .put(`http://localhost:3000/books/${id}`, book) // Send a PUT request to the server with the updated book object.
+      .put(`http://localhost:3000/books/${bookId}`, book)
       .then((response) => {
         console.log(response.data);
-        navigate(`/books/details/${id}`); // Redirect to the details page of the book.
+        navigate(`/books/details/${bookId}`);
       })
       .catch((error) => {
         console.log(error);
@@ -50,52 +49,61 @@ const EditBook = () => {
   };
 
   return (
-    <div>
-      <h1>Edit Book</h1>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="title">
-            Title
-            <input
-              type="text"
-              id="title"
+    <Modal open={open} onClose={handleClose}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: 400,
+          borderRadius: 1,
+          bgcolor: "background.paper",
+          p: 4,
+        }}
+      >
+        <Typography variant="h6" component="h2">
+          Edit Book
+        </Typography>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Title"
               value={book.title}
               onChange={(e) => updateBook("title", e.target.value)}
+              fullWidth
+              margin="normal"
             />
-          </label>
-          <label htmlFor="author">
-            Author
-            <input
-              type="text"
-              id="author"
+            <TextField
+              label="Author"
               value={book.author}
               onChange={(e) => updateBook("author", e.target.value)}
+              fullWidth
+              margin="normal"
             />
-          </label>
-          <label htmlFor="publishedYear">
-            Published Year
-            <input
-              type="text"
-              id="publishedYear"
-              value={book.publishedYear}
-              onChange={(e) => updateBook("publishedYear", e.target.value)}
+            <TextField
+              label="Publication Date"
+              value={new Date(book.publishedDate).toLocaleDateString()}
+              onChange={(e) => updateBook("publishedDate", e.target.value)}
+              fullWidth
+              margin="normal"
             />
-          </label>
-          <label htmlFor="genre">
-            Genre
-            <input
-              type="text"
-              id="genre"
+            <TextField
+              label="Genre"
               value={book.genre}
               onChange={(e) => updateBook("genre", e.target.value)}
+              fullWidth
+              margin="normal"
             />
-          </label>
-          <button type="submit">Save Changes</button>
-        </form>
-      )}
-    </div>
+            <Button variant="contained" color="primary" type="submit">
+              Save Changes
+            </Button>
+          </form>
+        )}
+      </Box>
+    </Modal>
   );
 };
 

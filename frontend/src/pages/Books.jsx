@@ -2,8 +2,9 @@ import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
-export default function Books() {
+const Books = () => {
   // Get the id from the URL
   // The id is a parameter in the URL that is used to identify the book
   // The useParams hook is used to access the parameters in the URL
@@ -31,16 +32,18 @@ export default function Books() {
 
   return (
     <div className="max-w-4xl mx-auto">
+      <BackButton />
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className="mt-3">
           <h1>{book.title}</h1>
           <p>{book.author}</p>
-          <p>{book.publishedYear}</p>
+          <p>{new Date(book.publishedDate).toLocaleDateString()}</p>
           <p>{book.genre}</p>
         </div>
       )}
     </div>
   );
-}
+};
+export default Books;

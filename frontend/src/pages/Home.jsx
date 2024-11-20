@@ -4,13 +4,27 @@ import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { PiBookOpen } from "react-icons/pi";
 import { PiPencilSimpleLineThin } from "react-icons/pi";
-import { PiPlusThin } from "react-icons/pi";
+import Navigation from "../components/Navigation";
 import { PiMinusCircleThin } from "react-icons/pi";
+import EditBook from "./EditBook";
+import CreateBook from "./CreateBook";
+
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
 // import { BsInfoCircle } from "react-icons/bs";
 // import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 const Home = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedBookId, setSelectedBookId] = useState(null);
+
+  const handleOpen = (id) => {
+    setSelectedBookId(id);
+    setOpenModal(true);
+  };
+  const handleClose = () => {
+    setOpenModal(false);
+    setSelectedBookId(null);
+  };
   // Define the state variables and the functions to update them
   // The state variables are books and isLoading
   // The functions to update the state variables are showBooks and setLoading respectively
@@ -60,22 +74,11 @@ const Home = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-10">
-      <div className="flex flex-row justify-between items-center">
-        <h1 className="text-2xl font-bold">My library ({books.length})</h1>
-        <span className="bg-gray-100 shadow-sm py-1 px-3 rounded">
-          <Link
-            className="flex flex-1 items-center gap-1 text-sm"
-            to="/books/create"
-          >
-            <PiPlusThin />
-            <span>Add new</span>
-          </Link>
-        </span>
-      </div>
+      <Navigation />
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="my-8">
+        <div className="my-5">
           <div>
             {books.map((book) => (
               <div key={book._id}>
@@ -90,9 +93,9 @@ const Home = () => {
                   {/* actions container */}
                   <div className="flex">
                     <span className="py-1 px-3 rounded">
-                      <Link to={`/books/edit/${book._id}`}>
+                      <button onClick={() => handleOpen(book._id)}>
                         <PiPencilSimpleLineThin className="text-lg" />
-                      </Link>
+                      </button>
                     </span>
                     <span className="py-1 px-3 rounded">
                       <button
@@ -108,6 +111,13 @@ const Home = () => {
             ))}
           </div>
         </div>
+      )}
+      {selectedBookId && (
+        <EditBook
+          open={openModal}
+          handleClose={handleClose}
+          bookId={selectedBookId}
+        />
       )}
     </div>
   );
