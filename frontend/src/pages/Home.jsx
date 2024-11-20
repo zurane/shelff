@@ -65,8 +65,7 @@ const Home = () => {
         <span className="bg-gray-100 shadow-sm py-1 px-3 rounded">
           <Link
             className="flex flex-1 items-center gap-1 text-sm"
-            to="/books/add"
-            data-tip="Add a new book"
+            to="/books/create"
           >
             <PiPlusThin />
             <span>Add new</span>
@@ -76,13 +75,13 @@ const Home = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="my-7">
+        <div className="my-8">
           <div>
             {books.map((book) => (
               <div key={book._id}>
                 <div className="flex flex-row items-center justify-between border-b ">
                   <Link
-                    className="py-3 flex flex-row items-center gap-2 hover:text-blue-400"
+                    className="py-4 flex flex-row items-center gap-2 hover:text-blue-400"
                     to={`/books/details/${book._id}`}
                   >
                     <PiBookOpen />
