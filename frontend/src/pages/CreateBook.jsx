@@ -5,6 +5,7 @@ import { Modal, Box, Button, TextField, Typography } from "@mui/material";
 
 const CreateBook = ({ openModal, close }) => {
   const navigate = useNavigate();
+  // const history = useHistory();
   // Define the state variable book and the function to update it
   const [book, setBook] = useState({
     title: "",
@@ -29,7 +30,7 @@ const CreateBook = ({ openModal, close }) => {
       .then((response) => {
         console.log(response.data);
         setBook(response.data);
-        navigate("/");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
