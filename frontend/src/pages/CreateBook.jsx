@@ -1,11 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Modal, Box, Button, TextField, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 
 const CreateBook = ({ openModal, close }) => {
-  const navigate = useNavigate();
-  // const history = useHistory();
+  // Define the prop types for the component
+  // The openModal prop is a boolean that determines if the modal is open or not
+  // The close prop is a function that will be called when the modal is closed
+  CreateBook.propTypes = {
+    openModal: PropTypes.bool,
+    close: PropTypes.func,
+  };
   // Define the state variable book and the function to update it
   const [book, setBook] = useState({
     title: "",
@@ -25,11 +30,12 @@ const CreateBook = ({ openModal, close }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Make a POST request to the server to create a new book
     axios
       .post(`http://localhost:3000/books`, book)
       .then((response) => {
         console.log(response.data);
-        setBook(response.data);
+        setBook(response.data); // Update the list of books with the new book
         window.location.reload();
       })
       .catch((error) => {

@@ -26,9 +26,9 @@ const Navigation = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto py-3">
       <div className="flex flex-row justify-between items-center">
-        <h1 className="text-xl font-bold">My library ({books.length})</h1>
+        <h1 className="text-md font-bold">My Recipes ({books.length})</h1>
         <span className="bg-gray-100 shadow-sm py-1 px-3 rounded">
           <button
             onClick={() => handleOpen()}
@@ -36,7 +36,7 @@ const Navigation = () => {
             to="/books/create"
           >
             <PiPlusThin />
-            <span>Add new</span>
+            <span>Add a new recipe</span>
           </button>
         </span>
       </div>

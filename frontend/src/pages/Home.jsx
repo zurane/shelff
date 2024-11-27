@@ -7,7 +7,7 @@ import { PiPencilSimpleLineThin } from "react-icons/pi";
 import Navigation from "../components/Navigation";
 import { PiMinusCircleThin } from "react-icons/pi";
 import EditBook from "./EditBook";
-import CreateBook from "./CreateBook";
+import Tabs from "../components/Tabs";
 
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
@@ -34,11 +34,9 @@ const Home = () => {
   // The function showBooks will update the state variable books
   const [books, showBooks] = useState([]);
   const [isLoading, setLoading] = useState(false);
-
   //Create a delete function that will be called when the delete button is clicked
   //The function will make a DELETE request to the server to delete the book with the given id
   //The function will then update the list of books by filtering out the book with the given id
-
   useEffect(() => {
     setLoading(true);
     axios
@@ -73,12 +71,13 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-10">
+    <div className="max-w-4xl mx-auto">
+      <Tabs />
       <Navigation />
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="my-5">
+        <div className="my-2">
           <div>
             {books.map((book) => (
               <div key={book._id}>
@@ -88,7 +87,15 @@ const Home = () => {
                     to={`/books/details/${book._id}`}
                   >
                     <PiBookOpen />
-                    <span className="text-md font-semibold">{book.title}</span>
+                    <div className="leading-5 ">
+                      <span className="text-md font-semibold">
+                        {book.title}
+                        <br />
+                        <span className="text-xs text-gray-400 font-light">
+                          Added {timeAgo(new Date(book.createdAt))}
+                        </span>
+                      </span>
+                    </div>
                   </Link>
                   {/* actions container */}
                   <div className="flex">
@@ -121,6 +128,42 @@ const Home = () => {
       )}
     </div>
   );
+
+  // Define a function that will return the time ago
+  // The function will take a date as an argument
+  function timeAgo(date) {
+    // Get the current date
+    const now = new Date();
+    // Calculate the difference in seconds between the current date and the given date
+    const seconds = Math.floor((now - date) / 1000);
+    // If the difference is greater than a year, return the number of years
+    let interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+      // If the difference is greater than a year, return the number of years
+      return interval + " years ago";
+    }
+    // If the difference is greater than a month, return the number of months
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return interval + " months ago";
+    }
+    // If the difference is greater than a day, return the number of days
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return interval + " days ago";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return interval + " hours ago";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+      return interval + " minutes ago";
+    }
+    return Math.floor(seconds) + " seconds ago";
+  }
 };
 
 export default Home;
+

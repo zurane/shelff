@@ -3,9 +3,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { Modal, Box, Button, TextField, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 
 const EditBook = ({ open, handleClose, bookId }) => {
+  EditBook.propTypes = {
+    open: PropTypes.bool,
+    handleClose: PropTypes.func,
+    bookId: PropTypes.number,
+  };
   const navigate = useNavigate();
+  
   const [book, setBook] = useState({
     title: "",
     author: "",
