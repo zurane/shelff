@@ -40,12 +40,12 @@ const Recipes = () => {
       ) : (
         <>
           <div className="grid grid-cols-2 gap-3 mt-5">
-            <div className=" p-3  bg-purple-50">
+            <div className=" p-3  bg-white border border-slate-100 rounded shadow-sm">
               <h1 className="text-lg font-bold border-b text-purple-950 py-2">
                 › {recipe.title}
               </h1>
               {/* The recipe details are displayed in a grid layout */}
-              <div className="grid grid-cols-2 py-4">
+              <div className="grid grid-cols-2 py-3">
                 <div className="leading-3 border-r">
                   <PiBowlSteamThin className="text-xl" />
                   <h5 className="font-bold text-sm uppercase">Category</h5>
@@ -67,7 +67,7 @@ const Recipes = () => {
               <ul className="">
                 {recipe.ingredients &&
                   recipe.ingredients.map((ingredient, index) => (
-                    <li key={index} className="py-2">
+                    <li key={index} className="py-1">
                       {ingredient}
                     </li>
                   ))}
