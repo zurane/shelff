@@ -1,42 +1,64 @@
-import axios from "axios";
 import { useState } from "react";
-import { Modal, Box, Button, TextField, Typography } from "@mui/material";
-import PropTypes from "prop-types";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  Modal,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+} from "@mui/material";
+import { Delete as DeleteIcon } from "@mui/icons-material";
 
 const CreateBook = ({ openModal, close }) => {
-  // Define the prop types for the component
-  // The openModal prop is a boolean that determines if the modal is open or not
-  // The close prop is a function that will be called when the modal is closed
-  CreateBook.propTypes = {
-    openModal: PropTypes.bool,
-    close: PropTypes.func,
-  };
-  // Define the state variable book and the function to update it
-  const [book, setBook] = useState({
+  const [recipe, setRecipe] = useState({
     title: "",
-    author: "",
-    publishedDate: "",
-    genre: "",
+    ingredients: [],
+    instructions: "",
+    cookingTime: "",
+    category: "",
   });
 
-  // Define the state variable isLoading and the function to update it
+  const [currentIngredient, setCurrentIngredient] = useState("");
 
-  const updateBook = (field, value) => {
-    setBook((prevBook) => ({
-      ...prevBook,
+  const navigate = useNavigate();
+
+  const updateRecipe = (field, value) => {
+    setRecipe((prevRecipe) => ({
+      ...prevRecipe,
       [field]: value,
+    }));
+  };
+  // Define the addIngredient function that will be called when the Add Ingredient button is clicked
+  // The function will add the currentIngredient to the list of ingredients in the recipe state
+  const addIngredient = () => {
+    if (currentIngredient.trim() !== "") {
+      setRecipe((prevRecipe) => ({
+        ...prevRecipe,
+        ingredients: [...prevRecipe.ingredients, currentIngredient],
+      }));
+      setCurrentIngredient("");
+    }
+  };
+
+  const removeIngredient = (index) => {
+    setRecipe((prevRecipe) => ({
+      ...prevRecipe,
+      ingredients: prevRecipe.ingredients.filter((_, i) => i !== index),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Make a POST request to the server to create a new book
     axios
-      .post(`http://localhost:3000/books`, book)
+      .post(`http://localhost:3000/recipes`, recipe)
       .then((response) => {
         console.log(response.data);
-        setBook(response.data); // Update the list of books with the new book
-        window.location.reload();
+        navigate("/"); // Redirect to the home page
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +66,7 @@ const CreateBook = ({ openModal, close }) => {
   };
 
   return (
-    <Modal open={openModal} close={close}>
+    <Modal open={openModal} onClose={close}>
       <Box
         sx={{
           position: "absolute",
@@ -58,78 +80,73 @@ const CreateBook = ({ openModal, close }) => {
         }}
       >
         <Typography variant="h6" component="h2">
-          Add a Book
+          Create a new recipe
         </Typography>
 
         <form onSubmit={handleSubmit}>
           <TextField
             label="Title"
-            value={book.title}
-            onChange={(e) => updateBook("title", e.target.value)}
+            value={recipe.title}
+            onChange={(e) => updateRecipe("title", e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Author"
-            value={book.author}
-            onChange={(e) => updateBook("author", e.target.value)}
+            label="New Ingredient"
+            value={currentIngredient}
+            onChange={(e) => setCurrentIngredient(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+          <Button variant="contained" color="primary" onClick={addIngredient}>
+            Add Ingredient
+          </Button>
+          <List>
+            {recipe.ingredients.map((ingredient, index) => (
+              <ListItem
+                key={index}
+                secondaryAction={
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => removeIngredient(index)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemText primary={ingredient} />
+              </ListItem>
+            ))}
+          </List>
+          <TextField
+            label="Instructions"
+            value={recipe.instructions}
+            onChange={(e) => updateRecipe("instructions", e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Publication Date"
-            value={book.publishedDate}
-            onChange={(e) => updateBook("publishedDate", e.target.value)}
+            label="Cooking Time"
+            value={recipe.cookingTime}
+            onChange={(e) => updateRecipe("cookingTime", e.target.value)}
             fullWidth
             margin="normal"
           />
           <TextField
-            label="Genre"
-            value={book.genre}
-            onChange={(e) => updateBook("genre", e.target.value)}
+            label="Category"
+            value={recipe.category}
+            onChange={(e) => updateRecipe("category", e.target.value)}
             fullWidth
             margin="normal"
           />
+
           <Button variant="contained" color="primary" type="submit">
-            Create new book
+            Create a new recipe
           </Button>
         </form>
       </Box>
     </Modal>
-    // <div className="max-w-4xl mx-auto p-10">
-    //   <h1>Add a new book</h1>
-    //   <form onSubmit={handleSubmit}>
-    //     <label htmlFor="title">Title</label>
-    //     <input
-    //       type="text"
-    //       id="title"
-    //       value={book.title}
-    //       onChange={(e) => updateBook("title", e.target.value)}
-    //     />
-    //     <label htmlFor="author">Author</label>
-    //     <input
-    //       type="text"
-    //       id="author"
-    //       value={book.author}
-    //       onChange={(e) => updateBook("author", e.target.value)}
-    //     />
-    //     <label htmlFor="publishedYear">Published Date</label>
-    //     <input
-    //       type="text"
-    //       id="publishedDate"
-    //       value={book.publishedDate}
-    //       onChange={(e) => updateBook("publishedDate", e.target.value)}
-    //     />
-    //     <label htmlFor="genre">Genre</label>
-    //     <input
-    //       type="text"
-    //       id="genre"
-    //       value={book.genre}
-    //       onChange={(e) => updateBook("genre", e.target.value)}
-    //     />
-    //     <button type="submit">Create Book</button>
-    //   </form>
-    // </div>
   );
 };
 

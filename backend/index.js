@@ -33,7 +33,7 @@ app.get("/", (request, response) => {
 
 // Use the book router for all routes starting with /books
 // The book router is responsible for managing the routes related to books.
-app.use("/books", bookRouter);
+app.use("/recipes", bookRouter);
 
 // Connect to the database
 mongoose

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// Create a book schema
+// Create a recipe schema
 
 const recipeSchema = mongoose.Schema(
     {
@@ -22,7 +22,7 @@ const recipeSchema = mongoose.Schema(
         },
         category: {
             type: String,
-            enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Dessert', 'Other'],
+            enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Dessert', 'Other'], // enum means the value of category field must be from the given array.
             default: 'Other',
         },
 
@@ -32,5 +32,5 @@ const recipeSchema = mongoose.Schema(
     }
 );
 
-//Creation of the Book model
+//Creation of the Recipe model
 export const Recipe = mongoose.model("Recipe", recipeSchema);

@@ -13,6 +13,9 @@ const Tabs = () => {
     { id: 1, label: "Dinner", bgColor: "bg-purple-200" },
     { id: 2, label: "Breakfast", bgColor: "bg-gray-100" },
     { id: 3, label: "Supper", bgColor: "bg-yellow-400" },
+    { id: 4, label: "Snack", bgColor: "bg-blue-300" },
+    { id: 5, label: "Dessert", bgColor: "bg-gray-400" },
+    { id: 6, label: "Other", bgColor: "bg-purple-400" }
   ];
 
   const settings = {
@@ -49,7 +52,7 @@ const Tabs = () => {
         {tabs.map((tab) => (
           <div key={tab.id} className="px-2">
             <div
-              className={`${tab.bgColor} rounded-md shadow-md  py-10 px-3 cursor-pointer`}
+              className={`${tab.bgColor} rounded-md shadow-md  py-14 px-3 cursor-pointer`}
               onClick={() => setSelectedTab(tab.id)}
             >
               <h4 className="font-semibold text-md">{tab.label}</h4>

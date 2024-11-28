@@ -1,5 +1,5 @@
 import express from "express";
-import { Book } from "../models/bookModel.js";
+import { Recipe, Recipe as recipeModel } from "../models/recipeModel.js";
 
 // express router is responsible for managing the routes
 // and the middleware for the routes.
@@ -8,32 +8,35 @@ import { Book } from "../models/bookModel.js";
 // A Router instance is often referred to as a “mini-app”.
 const router = express.Router();
 
-// Create a new book document
+// Create a new recipe document
 router.post("/", async (request, response) => {
   try {
     if (
       // Check if all fields are present in the request body
       !request.body.title ||
-      !request.body.author ||
-      !request.body.publishedDate || //for example, 2021-01-01
-      !request.body.genre
+      !request.body.ingredients ||
+      !request.body.instructions ||
+      !request.body.cookingTime ||
+      !request.body.category
     ) {
       // if any of the required fields is missing, then send an error message and status code 400 for bad request.
       return response.status(400).send({ message: "All fields are required" });
     }
     // if the request body is valid then:
-    // Create a new book document with the request body data
-    const newBook = new Book({
+    // Create a new recipe document with the request body data
+    const newRecipe = new recipeModel({
       title: request.body.title,
-      author: request.body.author,
-      publishedDate: new Date(request.body.publishedDate),
-      genre: request.body.genre,
+      ingredients: request.body.ingredients,
+      instructions: request.body.instructions,
+      cookingTime: request.body.cookingTime,
+      category: request.body.category,
+
     });
-    // Now, the new book document is saved to the database
+    // Now, the new recipe document is saved to the database
     // The await keyword is used to wait for the promise to be resolved since the create method returns a promise.
-    const book = await Book.create(newBook);
-    // Send the book document as a response with status code 201 for successfully creating a new resource in the database.
-    return response.status(201).send(book);
+    const recipe = await recipeModel.create(newRecipe);
+    // Send the recipe document as a response with status code 201 for successfully creating a new resource in the database.
+    return response.status(201).send(recipe);
   } catch (error) {
     console.log(error);
     // Send an error message and status code 500 for internal server error
@@ -41,15 +44,15 @@ router.post("/", async (request, response) => {
   }
 });
 
-// Get all books from the database
+// Get all recipes from the database
 router.get("/", async (request, response) => {
   try {
-    // Find all the book documents in the database
-    const books = await Book.find({});
-    // Send the book documents as a response with status code 200 for successful request
+    // Find all the recipe documents in the database
+    const recipes = await recipeModel.find({});
+    // Send the recipe documents as a response with status code 200 for successful request
     return response.status(200).send({
-      count: books.length,
-      data: books,
+      count: recipes.length,
+      data: recipes,
     });
   } catch (error) {
     console.log(error);
@@ -58,12 +61,12 @@ router.get("/", async (request, response) => {
   }
 });
 
-// Get a book by id
+// Get a recipe by id
 router.get("/:id", async (request, response) => {
   try {
-    // Find a book document by id
-    const book = await Book.findById(request.params.id);
-    return response.status(200).send(book);
+    // Find a recipe document by id
+    const recipe = await recipeModel.findById(request.params.id);
+    return response.status(200).send(recipe);
   } catch (error) {
     console.log(error);
     // Send an error message and status code 500 for internal server error
@@ -71,41 +74,40 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-// Update a book by id
+// Update a recipe by id
 router.put("/:id", async (request, response) => {
   try {
     if (
       !request.body.title ||
-      !request.body.author ||
-      !request.body.publishedDate ||
-      !request.body.genre
+      !request.body.ingredients ||
+      !request.body.instructions ||
+      !request.body.cookingTime ||
+      !request.body.category
     ) {
       return response.status(400).send({ message: "All fields are required" });
     }
-    // This line of code will find a book by id and update the book document with the request body data.
-    // The params is a react-router-dom object that contains the URL parameters, and the id is the parameter we want to get.
+    // This line of code will find a recipe by id and update the recipe document with the request body data.
     const id = request.params.id;
-    const bookResults = await Book.findByIdAndUpdate(id, request.body);
-    // If the book is not found, then send an error message and status code 404 for not found.
-    if (!bookResults) {
-      return response.status(404).send({ message: "Book not found" });
+    const recipeResults = await Recipe.findByIdAndUpdate(id, request.body);
+    if (!recipeResults) {
+      return response.status(404).send({ message: "recipe not found" });
     }
-    return response.status(200).send({ message: "Book updated successfully" });
+    return response.status(200).send({ message: "recipe updated successfully" });
   } catch (error) {
     console.log(error);
     return response.status(500).send({ message: error.message });
   }
 });
 
-// Delete a book by id
+// Delete a recipe by id
 router.delete("/:id", async (request, response) => {
   try {
-    // Find a book by id and delete it
-    const book = await Book.findByIdAndDelete(request.params.id);
-    if (!book) {
-      return response.status(404).send({ message: "Book not found" });
+    // Find a recipe by id and delete it
+    const recipe = await recipeModel.findByIdAndDelete(request.params.id);
+    if (!recipe) {
+      return response.status(404).send({ message: "Recipe not found" });
     }
-    return response.status(200).send({ message: "Book deleted successfully" });
+    return response.status(200).send({ message: "Recipe deleted successfully" });
   } catch (error) {
     console.log(error);
     return response.status(500).send({ message: error.message });
