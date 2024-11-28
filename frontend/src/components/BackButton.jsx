@@ -9,7 +9,7 @@ const BackButton = () => {
           onClick={() => window.history.back()}
         >
           <PiArrowLeftThin className="text-xl text-purple-950 rounded" />
-          <span className="text-md font-semibold">Back</span>
+          <span className="text-md font-semibold">Back to recipes</span>
         </button>
       </div>
     </div>

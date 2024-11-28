@@ -68,7 +68,7 @@ const Recipes = () => {
                 {recipe.ingredients &&
                   recipe.ingredients.map((ingredient, index) => (
                     <li key={index} className="py-1">
-                      {ingredient}
+                     › {ingredient}
                     </li>
                   ))}
               </ul>
