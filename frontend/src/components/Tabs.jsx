@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,16 +7,41 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import PropTypes from "prop-types";
 
 const Tabs = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0); // eslint-disable-line no-unused-vars
 
   const tabs = [
-    { id: 0, label: "Lunch", bgColor: "bg-green-50" },
-    { id: 1, label: "Dinner", bgColor: "bg-purple-200" },
-    { id: 2, label: "Breakfast", bgColor: "bg-gray-100" },
-    { id: 3, label: "Supper", bgColor: "bg-yellow-400" },
-    { id: 4, label: "Snack", bgColor: "bg-blue-300" },
-    { id: 5, label: "Dessert", bgColor: "bg-gray-400" },
-    { id: 6, label: "Other", bgColor: "bg-purple-400" }
+    { id: 0, label: "Lunch", bgColor: "bg-green-50", path: "/catergory/lunch" },
+    {
+      id: 1,
+      label: "Dinner",
+      bgColor: "bg-purple-200",
+      path: "/catergory/dinner",
+    },
+    {
+      id: 2,
+      label: "Breakfast",
+      bgColor: "bg-gray-100",
+      path: "/catergory/breakfast",
+    },
+    {
+      id: 3,
+      label: "Supper",
+      bgColor: "bg-yellow-400",
+      path: "/catergory/supper",
+    },
+    { id: 4, label: "Snack", bgColor: "bg-blue-300", path: "/catergory/snack" },
+    {
+      id: 5,
+      label: "Dessert",
+      bgColor: "bg-gray-400",
+      path: "/catergory/dessert",
+    },
+    {
+      id: 6,
+      label: "Other",
+      bgColor: "bg-purple-400",
+      path: "/catergory/other",
+    },
   ];
 
   const settings = {
@@ -50,14 +76,14 @@ const Tabs = () => {
     <div className="relative  px-2 py-4 bg-slate-50 ">
       <Slider {...settings}>
         {tabs.map((tab) => (
-          <div key={tab.id} className="px-2">
+          <Link to={tab.path} key={tab.id} className="px-2">
             <div
               className={`${tab.bgColor} rounded-md shadow-md  py-14 px-3 cursor-pointer`}
               onClick={() => setSelectedTab(tab.id)}
             >
               <h4 className="font-semibold text-md">{tab.label}</h4>
             </div>
-          </div>
+          </Link>
         ))}
       </Slider>
     </div>
