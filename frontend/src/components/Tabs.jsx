@@ -78,7 +78,7 @@ const Tabs = () => {
         {tabs.map((tab) => (
           <Link to={tab.path} key={tab.id} className="px-2">
             <div
-              className={`${tab.bgColor} rounded-md shadow-md  py-14 px-3 cursor-pointer`}
+              className={`${tab.bgColor} rounded-md shadow-md  py-16 px-3 cursor-pointer`}
               onClick={() => setSelectedTab(tab.id)}
             >
               <h4 className="font-semibold text-md">{tab.label}</h4>

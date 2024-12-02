@@ -89,7 +89,7 @@ const Home = () => {
                     <PiBookOpen />
                     <div className="leading-5 ">
                       <span className="text-md font-semibold">
-                        {recipe.title}
+                       {recipe.title}
                         <br />
                         <span className="text-xs text-gray-400 font-light">
                           Added {timeAgo(new Date(recipe.createdAt))}

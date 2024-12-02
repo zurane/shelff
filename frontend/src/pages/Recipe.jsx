@@ -45,7 +45,7 @@ const Recipes = () => {
           <div className="grid grid-cols-2 gap-3 mt-5">
             <div className=" p-3  bg-white border border-slate-100 rounded shadow-sm">
               <h1 className="text-lg font-bold border-b text-purple-950 py-2">
-                › {recipe.title}
+                › Preparing {recipe.title}
               </h1>
               {/* The recipe details are displayed in a grid layout */}
               <div className="grid grid-cols-2 py-3">
@@ -67,25 +67,31 @@ const Recipes = () => {
             </div>
             <div className="flex flex-row items-center justify-evenly border border-slate-100 shadow-sm rounded">
               <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
-                <PiArrowDownThin className="text-purple-400 text-2xl" />
+                <span className="bg-purple-100 p-2 rounded-full">
+                  <PiArrowDownThin className="text-purple-400 text-2xl" />
+                </span>
                 Download
               </button>
 
               <button className=" text-gray px-10 py-2 rounded border-r border-l flex flex-col items-center justify-center ">
-                <PiHeart className="text-purple-400 text-2xl" />
+                <span className="bg-purple-100 p-2 rounded-full">
+                  <PiHeart className="text-2xl text-purple-400" />
+                </span>
                 Save recipe
               </button>
 
               <button className=" text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
-                <span>
+                <span className="bg-purple-100 p-2 rounded-full">
                   <PiShareFatThin className="text-purple-400 text-2xl" />
                 </span>
                 Share
               </button>
             </div>
-            <div className="bg-slate-50 p-3 col-span-2">
-              <h2 className="text-lg font-bold border-b py-2">Ingredients</h2>
-              <ul className="">
+            <div className="bg-gray-50 rounded p-3 col-span-2 border border-slate-100 shadow-sm">
+              <h2 className="text-lg font-bold border-b py-2">
+                Recipe Ingredients
+              </h2>
+              <ul className="py-2">
                 {recipe.ingredients &&
                   recipe.ingredients.map((ingredient, index) => (
                     <li key={index} className="py-1">
@@ -93,6 +99,17 @@ const Recipes = () => {
                     </li>
                   ))}
               </ul>
+            </div>
+            <div className="bg-gray-50 rounded border border-slate-100 shadow-sm p-3 col-span-2">
+              <h2 className="text-lg font-bold border-b py-2">Cook Method</h2>
+              <ol className="py-3">
+                {recipe.instructions &&
+                  recipe.instructions.map((instruction, index) => (
+                    <li key={index} className="py-1">
+                      › {instruction}
+                    </li>
+                  ))}
+              </ol>
             </div>
           </div>
         </>

@@ -58,7 +58,7 @@ const CreateBook = ({ openModal, close }) => {
       .post(`http://localhost:3000/recipes`, recipe)
       .then((response) => {
         console.log(response.data);
-        navigate("/"); // Redirect to the home page
+        navigate("/recipes"); // Redirect to the home page
       })
       .catch((error) => {
         console.log(error);
