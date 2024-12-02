@@ -44,21 +44,21 @@ const Recipes = () => {
         <>
           <div className="grid grid-cols-2 gap-3 mt-5">
             <div className=" p-3  bg-white border border-slate-100 rounded shadow-sm">
-              <h1 className="text-lg font-bold border-b text-purple-950 py-2">
+              <h1 className="text-lg font-bold border-b text-purple-heart-950 py-2">
                 › Preparing {recipe.title}
               </h1>
               {/* The recipe details are displayed in a grid layout */}
               <div className="grid grid-cols-2 py-3">
                 <div className="leading-3 border-r">
-                  <PiBowlSteamThin className="text-xl" />
-                  <h5 className="font-bold text-sm uppercase">Category</h5>
+                  <PiBowlSteamThin className="text-xl text-purple-heart-400" />
+                  <h5 className="font-bold text-sm">Category</h5>
                   <p className="text-md text-gray-700 py-2">
                     {recipe.category}
                   </p>
                 </div>
                 <div className="leading-3 pl-4">
-                  <PiAlarmThin className="text-xl" />
-                  <h5 className="font-bold text-sm uppercase">Cooking time</h5>
+                  <PiAlarmThin className="text-xl text-purple-heart-400" />
+                  <h5 className="font-bold text-sm ">Cooking time</h5>
                   <p className="text-md text-gray-700 py-2">
                     {recipe.cookingTime} minutes
                   </p>
@@ -67,29 +67,29 @@ const Recipes = () => {
             </div>
             <div className="flex flex-row items-center justify-evenly border border-slate-100 shadow-sm rounded">
               <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
-                <span className="bg-purple-100 p-2 rounded-full">
-                  <PiArrowDownThin className="text-purple-400 text-2xl" />
+                <span className="bg-purple-heart-50 p-2 rounded-full">
+                  <PiArrowDownThin className="text-purple-heart-400 text-2xl" />
                 </span>
                 Download
               </button>
 
               <button className=" text-gray px-10 py-2 rounded border-r border-l flex flex-col items-center justify-center ">
-                <span className="bg-purple-100 p-2 rounded-full">
-                  <PiHeart className="text-2xl text-purple-400" />
+                <span className="bg-purple-heart-50 p-2 rounded-full">
+                  <PiHeart className="text-2xl text-purple-heart-400" />
                 </span>
                 Save recipe
               </button>
 
               <button className=" text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
-                <span className="bg-purple-100 p-2 rounded-full">
-                  <PiShareFatThin className="text-purple-400 text-2xl" />
+                <span className="bg-purple-heart-50 p-2 rounded-full">
+                  <PiShareFatThin className="text-purple-heart-400 text-2xl" />
                 </span>
                 Share
               </button>
             </div>
-            <div className="bg-gray-50 rounded p-3 col-span-2 border border-slate-100 shadow-sm">
-              <h2 className="text-lg font-bold border-b py-2">
-                Recipe Ingredients
+            <div className="rounded-lg p-3 col-span-2 border border-slate-100 shadow-sm">
+              <h2 className="text-md text-purple-heart-950 font-bold border-b py-2">
+                › Recipe Ingredients
               </h2>
               <ul className="py-2">
                 {recipe.ingredients &&
@@ -100,8 +100,10 @@ const Recipes = () => {
                   ))}
               </ul>
             </div>
-            <div className="bg-gray-50 rounded border border-slate-100 shadow-sm p-3 col-span-2">
-              <h2 className="text-lg font-bold border-b py-2">Cook Method</h2>
+            <div className=" rounded-lg border border-slate-100 shadow-sm p-3 col-span-2">
+              <h2 className="text-md text-purple-heart-950 font-bold border-b py-2">
+                › Cook Method
+              </h2>
               <ol className="py-3">
                 {recipe.instructions &&
                   recipe.instructions.map((instruction, index) => (
