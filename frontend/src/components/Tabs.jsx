@@ -10,36 +10,36 @@ const Tabs = () => {
   const [selectedTab, setSelectedTab] = useState(0); // eslint-disable-line no-unused-vars
 
   const tabs = [
-    { id: 0, label: "Lunch", bgColor: "bg-green-50", path: "/catergory/lunch" },
+    { id: 0, label: "Lunch", bgColor: "bg-green-200", path: "/catergory/lunch" },
     {
       id: 1,
       label: "Dinner",
-      bgColor: "bg-purple-200",
+      bgColor: "bg-red-200",
       path: "/catergory/dinner",
     },
     {
       id: 2,
       label: "Breakfast",
-      bgColor: "bg-gray-100",
+      bgColor: "bg-yellow-200",
       path: "/catergory/breakfast",
     },
     {
       id: 3,
       label: "Supper",
-      bgColor: "bg-yellow-400",
+      bgColor: "bg-purple-200",
       path: "/catergory/supper",
     },
-    { id: 4, label: "Snack", bgColor: "bg-blue-300", path: "/catergory/snack" },
+    { id: 4, label: "Snack", bgColor: "bg-blue-200", path: "/catergory/snack" },
     {
       id: 5,
       label: "Dessert",
-      bgColor: "bg-gray-400",
+      bgColor: "bg-pink-200",
       path: "/catergory/dessert",
     },
     {
       id: 6,
       label: "Other",
-      bgColor: "bg-purple-400",
+      bgColor: "bg-orange-200",
       path: "/catergory/other",
     },
   ];

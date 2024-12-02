@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import { PiAlarmThin } from "react-icons/pi";
 import { PiBowlSteamThin } from "react-icons/pi";
+import { PiArrowDownThin } from "react-icons/pi";
+import { PiHeart } from "react-icons/pi";
+import { PiShareFatThin } from "react-icons/pi";
 
 const Recipes = () => {
   // Get the id from the URL
@@ -62,13 +65,31 @@ const Recipes = () => {
                 </div>
               </div>
             </div>
+            <div className="flex flex-row items-center justify-evenly border border-slate-100 shadow-sm rounded">
+              <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
+                <PiArrowDownThin className="text-purple-400 text-2xl" />
+                Download
+              </button>
+
+              <button className=" text-gray px-10 py-2 rounded border-r border-l flex flex-col items-center justify-center ">
+                <PiHeart className="text-purple-400 text-2xl" />
+                Save recipe
+              </button>
+
+              <button className=" text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
+                <span>
+                  <PiShareFatThin className="text-purple-400 text-2xl" />
+                </span>
+                Share
+              </button>
+            </div>
             <div className="bg-slate-50 p-3 col-span-2">
               <h2 className="text-lg font-bold border-b py-2">Ingredients</h2>
               <ul className="">
                 {recipe.ingredients &&
                   recipe.ingredients.map((ingredient, index) => (
                     <li key={index} className="py-1">
-                     › {ingredient}
+                      › {ingredient}
                     </li>
                   ))}
               </ul>
