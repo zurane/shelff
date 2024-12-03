@@ -50,14 +50,14 @@ const Recipes = () => {
               {/* The recipe details are displayed in a grid layout */}
               <div className="grid grid-cols-2 py-3">
                 <div className="leading-3 border-r">
-                  <PiBowlSteamThin className="text-xl text-purple-heart-400" />
+                  <PiBowlSteamThin className="text-xl text-yellow-700" />
                   <h5 className="font-bold text-sm">Category</h5>
                   <p className="text-md text-gray-700 py-2">
                     {recipe.category}
                   </p>
                 </div>
                 <div className="leading-3 pl-4">
-                  <PiAlarmThin className="text-xl text-purple-heart-400" />
+                  <PiAlarmThin className="text-xl text-green-700" />
                   <h5 className="font-bold text-sm ">Cooking time</h5>
                   <p className="text-md text-gray-700 py-2">
                     {recipe.cookingTime} minutes
@@ -67,8 +67,8 @@ const Recipes = () => {
             </div>
             <div className="flex flex-row items-center justify-evenly border border-slate-100 shadow-sm rounded">
               <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
-                <span className="bg-purple-heart-50 p-2 rounded-full">
-                  <PiArrowDownThin className="text-purple-heart-400 text-2xl" />
+                <span className="bg-persian-blue-100 p-2 rounded-full">
+                  <PiArrowDownThin className="text-persian-blue-400 text-2xl" />
                 </span>
                 Download
               </button>
@@ -81,14 +81,14 @@ const Recipes = () => {
               </button>
 
               <button className=" text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
-                <span className="bg-purple-heart-50 p-2 rounded-full">
-                  <PiShareFatThin className="text-purple-heart-400 text-2xl" />
+                <span className="bg-cognac-50 p-2 rounded-full">
+                  <PiShareFatThin className="text-cognac-400 text-2xl" />
                 </span>
                 Share
               </button>
             </div>
             <div className="rounded-lg p-3 col-span-2 border border-slate-100 shadow-sm">
-              <h2 className="text-md text-purple-heart-950 font-bold border-b py-2">
+              <h2 className="text-md  font-bold border-b py-2">
                 › Recipe Ingredients
               </h2>
               <ul className="py-2">
@@ -101,7 +101,7 @@ const Recipes = () => {
               </ul>
             </div>
             <div className=" rounded-lg border border-slate-100 shadow-sm p-3 col-span-2">
-              <h2 className="text-md text-purple-heart-950 font-bold border-b py-2">
+              <h2 className="text-md  font-bold border-b py-2">
                 › Cook Method
               </h2>
               <ol className="py-3">
