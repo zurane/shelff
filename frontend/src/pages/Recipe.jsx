@@ -36,16 +36,16 @@ const Recipes = () => {
   }, [id]);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-1">
       <BackButton />
       {isLoading ? (
         <Spinner />
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-3 mt-5">
-            <div className=" p-3  bg-white border border-slate-100 rounded shadow-sm">
-              <h1 className="text-lg font-bold border-b text-purple-heart-950 py-2">
-                › Preparing {recipe.title}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+            <div className="p-3 bg-slate-50 border border-gray-100 rounded shadow-sm">
+              <h1 className="text-xl font-bold border-b py-2">
+                › {recipe.title}
               </h1>
               {/* The recipe details are displayed in a grid layout */}
               <div className="grid grid-cols-2 py-3">
@@ -65,51 +65,48 @@ const Recipes = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row items-center justify-evenly border border-slate-100 shadow-sm rounded">
+            {/* Actions */}
+            <div className="flex flex-row items-center justify-evenly bg-slate-50 border border-gray-100 shadow-sm rounded md:col-span-1  sm:col-span-2">
               <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
                 <span className="bg-persian-blue-100 p-2 rounded-full">
-                  <PiArrowDownThin className="text-persian-blue-400 text-2xl" />
+                  <PiArrowDownThin className="text-persian-blue-500 text-xl" />
                 </span>
                 Download
               </button>
-
-              <button className=" text-gray px-10 py-2 rounded border-r border-l flex flex-col items-center justify-center ">
+              <button className="text-gray px-6 py-2 rounded border-r border-l flex flex-col items-center justify-center">
                 <span className="bg-purple-heart-50 p-2 rounded-full">
-                  <PiHeart className="text-2xl text-purple-heart-400" />
+                  <PiHeart className="text-xl text-purple-heart-500" />
                 </span>
-                Save recipe
+                Favorite
               </button>
-
-              <button className=" text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
+              <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
                 <span className="bg-cognac-50 p-2 rounded-full">
-                  <PiShareFatThin className="text-cognac-400 text-2xl" />
+                  <PiShareFatThin className="text-cognac-500 text-xl" />
                 </span>
                 Share
               </button>
             </div>
-            <div className="rounded-lg p-3 col-span-2 border border-slate-100 shadow-sm">
-              <h2 className="text-md  font-bold border-b py-2">
-                › Recipe Ingredients
+            {/* Recipe and method */}
+
+            <div className="rounded-lg col-span-1 sm:col-span-2">
+              <h2 className="text-md font-bold border-b py-2">
+                Recipe Ingredients
               </h2>
-              <ul className="py-2">
+              <ul className="py-2 leading-8">
                 {recipe.ingredients &&
                   recipe.ingredients.map((ingredient, index) => (
-                    <li key={index} className="py-1">
-                      › {ingredient}
-                    </li>
+                    <li key={index}>› {ingredient}</li>
                   ))}
               </ul>
             </div>
-            <div className=" rounded-lg border border-slate-100 shadow-sm p-3 col-span-2">
-              <h2 className="text-md  font-bold border-b py-2">
-                › Cook Method
+            <div className="rounded-lg p-1 col-span-1 sm:col-span-2">
+              <h2 className="text-md font-bold border-b py-2">
+                Cooking Instructions
               </h2>
-              <ol className="py-3">
+              <ol className="p-2 list-decimal leading-8">
                 {recipe.instructions &&
                   recipe.instructions.map((instruction, index) => (
-                    <li key={index} className="py-1">
-                      › {instruction}
-                    </li>
+                    <li key={index}>{instruction}</li>
                   ))}
               </ol>
             </div>

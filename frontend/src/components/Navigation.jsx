@@ -27,16 +27,16 @@ const Navigation = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-3">
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between m-2 items-center">
         <h1 className="text-md font-bold">All Recipes ({recipes.count})</h1>
-        <span className="bg-gray-100 shadow-sm py-1 px-3 rounded">
+        <span className="bg-green-200 shadow-sm py-2 px-3 rounded-full">
           <button
             onClick={() => handleOpen()}
             className="flex flex-1 items-center gap-1 text-sm"
             to="/recipes/create"
           >
-            <PiPlusThin />
-            <span>Add a new recipe</span>
+            <PiPlusThin className="text-black text-sm" />
+            <span className="font-semibold text-black">Add a new recipe</span>
           </button>
         </span>
       </div>

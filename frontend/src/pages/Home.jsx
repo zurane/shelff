@@ -71,13 +71,13 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto my-2 py-4">
       <Tabs />
       <Navigation />
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="my-2">
+        <div className="m-2">
           <div>
             {recipes.map((recipe) => (
               <div key={recipe._id}>
@@ -89,7 +89,7 @@ const Home = () => {
                     <PiBookOpen />
                     <div className="leading-5 ">
                       <span className="text-md font-semibold">
-                       {recipe.title}
+                        {recipe.title}
                         <br />
                         <span className="text-xs text-gray-400 font-light">
                           Added {timeAgo(new Date(recipe.createdAt))}
