@@ -26,15 +26,16 @@ const Recipes = () => {
       .get(`http://localhost:3000/recipes/${id}`)
       .then((response) => {
         console.log(response.data);
-        showRecipe(response.data);
-        setLoading(false);
+        setTimeout(() => {
+          showRecipe(response.data);
+          setLoading(false);
+        }, 500); 
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
   }, [id]);
-
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-1">
       <BackButton />
@@ -43,7 +44,7 @@ const Recipes = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-            <div className="p-3 bg-slate-50 border border-gray-100 rounded shadow-sm">
+            <div className="p-5 bg-slate-50 border border-gray-100 rounded shadow-sm">
               <h1 className="text-xl font-bold border-b py-2">
                 › {recipe.title}
               </h1>

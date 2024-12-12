@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { PiBookOpen } from "react-icons/pi";
 import { PiPencilSimpleLineThin } from "react-icons/pi";
@@ -8,6 +7,7 @@ import Navigation from "../components/Navigation";
 import { PiMinusCircleThin } from "react-icons/pi";
 import EditBook from "./EditBook";
 import Tabs from "../components/Tabs";
+import Spinner from "../components/Spinner";
 
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
@@ -44,11 +44,13 @@ const Home = () => {
       .then((response) => {
         console.log(response.data);
         if (Array.isArray(response.data.data)) {
-          showBooks(response.data.data);
+          setTimeout(() => {
+            showBooks(response.data.data);
+            setLoading(false);
+          }, 500);
         } else {
           showBooks([]);
         }
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);

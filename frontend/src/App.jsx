@@ -4,6 +4,8 @@ import Recipe from "./pages/Recipe";
 import Dinner from "./pages/Dinner";
 import Breakfast from "./pages/Breakfast";
 import Lunch from "./pages/Lunch";
+import Snacks from "./pages/Snacks";
+import Dessert from "./pages/Dessert";
 import Other from "./pages/Other";
 import AppBarTop from "./components/AppBarTop";
 
@@ -16,6 +18,8 @@ const App = () => {
         <Route path="/recipes/details/:id" element={<Recipe />} />
         <Route path="/catergory/dinner" element={<Dinner />} />
         <Route path="/catergory/breakfast" element={<Breakfast />} />
+        <Route path="/catergory/snack" element={<Snacks />} />
+        <Route path="/catergory/dessert" element={<Dessert />} />
         <Route path="/catergory/lunch" element={<Lunch />} />
         <Route path="/catergory/other" element={<Other />} />
       </Routes>
