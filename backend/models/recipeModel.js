@@ -23,7 +23,6 @@ const recipeSchema = mongoose.Schema(
         category: {
             type: String,
             enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack', 'Dessert'], // enum means the value of category field must be from the given array.
-            default: 'Other',
         },
 
     },

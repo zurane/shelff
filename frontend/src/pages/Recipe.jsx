@@ -36,6 +36,7 @@ const Recipes = () => {
         setLoading(false);
       });
   }, [id]);
+  
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-1">
       <BackButton />
@@ -87,8 +88,7 @@ const Recipes = () => {
                 Share
               </button>
             </div>
-            {/* Recipe and method */}
-
+            {/* Recipe and Instructions */}
             <div className="rounded-lg col-span-1 sm:col-span-2">
               <h2 className="text-md font-bold border-b py-2">
                 Recipe Ingredients

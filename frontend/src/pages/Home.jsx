@@ -89,7 +89,7 @@ const Home = () => {
                     to={`/recipes/details/${recipe._id}`}
                   >
                     <PiBookOpen />
-                    <div className="leading-5 ">
+                    <div className="leading-5">
                       <span className="text-md font-semibold">
                         {recipe.title}
                         <br />

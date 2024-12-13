@@ -40,7 +40,7 @@ const Breakfast = () => {
               <PiSpinner className="text-4xl" />
       ) : (
         <div className="py-5">
-          <h1 className="font-bold text-lg">Breakfast Recipes</h1>
+          <h1 className="font-bold text-4xl">Breakfast Recipes ({checkDinner.length})</h1>
           <div className="recipes py-5">
             {checkDinner.map((recipe) => (
               <div key={recipe._id}>

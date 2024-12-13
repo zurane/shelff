@@ -84,7 +84,7 @@ const Tabs = () => {
 
   return (
     <>
-      <h2 className="text-md py-1 px-2 font-bold text-left">
+      <h2 className="text-xl py-1 px-2 font-bold text-left">
         Explore Categories
       </h2>
       <div className="relative px-1 py-4">
@@ -92,7 +92,7 @@ const Tabs = () => {
           {tabs.map((tab) => (
             <Link to={tab.path} key={tab.id} className="px-1">
               <div
-                className={`${tab.bgColor} rounded-md shadow-md py-16 px-3 cursor-pointer`}
+                className={`${tab.bgColor} rounded-md shadow-md py-20 px-3 cursor-pointer`}
                 style={{
                   backgroundImage: tab.bgImg ? `url(${tab.bgImg})` : "none",
                   backgroundSize: "cover",
