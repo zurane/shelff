@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { PiBookOpen } from "react-icons/pi";
 import BackButton from "../components/BackButton";
 import { PiSpinner } from "react-icons/pi";
+import Spinner from "../components/Spinner";
 
 const Breakfast = () => {
   const [recipes, setRecipes] = useState([]);
@@ -30,6 +31,7 @@ const Breakfast = () => {
 
   const checkDinner = recipes.filter(
     (recipe) => recipe.category === "Breakfast"
+    
   );
   console.log(checkDinner);
 
@@ -37,7 +39,7 @@ const Breakfast = () => {
     <div className="max-w-4xl mx-auto">
       <BackButton />
       {isLoading ? (
-              <PiSpinner className="text-4xl" />
+        <Spinner />
       ) : (
         <div className="py-5">
           <h1 className="font-bold text-4xl">Breakfast Recipes ({checkDinner.length})</h1>

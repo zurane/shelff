@@ -5,7 +5,7 @@ import { PiBookOpen } from "react-icons/pi";
 import { PiPencilSimpleLineThin } from "react-icons/pi";
 import Navigation from "../components/Navigation";
 import { PiMinusCircleThin } from "react-icons/pi";
-import EditBook from "./EditBook";
+import EditBook from "./EditRecipe";
 import Tabs from "../components/Tabs";
 import Spinner from "../components/Spinner";
 

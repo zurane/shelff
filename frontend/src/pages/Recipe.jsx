@@ -8,6 +8,7 @@ import { PiBowlSteamThin } from "react-icons/pi";
 import { PiArrowDownThin } from "react-icons/pi";
 import { PiHeart } from "react-icons/pi";
 import { PiShareFatThin } from "react-icons/pi";
+import { Tab } from "@headlessui/react";
 
 const Recipes = () => {
   // Get the id from the URL
@@ -19,6 +20,30 @@ const Recipes = () => {
   // The functions to update the state variables are showBook and setLoading respectively
   const [recipe, showRecipe] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const saveFile = () => {
+    // Create a copy of the recipe object
+    const modifiedRecipe = { ...recipe };
+    // Remove the specified key-value pairs that we do not need
+    delete modifiedRecipe._id;
+    delete modifiedRecipe.createdAt;
+    delete modifiedRecipe.updatedAt;
+    delete modifiedRecipe.__v;
+    // Convert the book object to a JSON string
+    const recipeData = JSON.stringify(modifiedRecipe, null, 2);
+    // Create a new blob object with the recipe data and the recipe id
+    const blob = new Blob([recipeData], { type: "text/plain" });
+    // Create a URL for the blob object
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `recipe_${id}.txt`;
+    document.body.appendChild(link);
+    // Click the link to download the file
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -29,14 +54,14 @@ const Recipes = () => {
         setTimeout(() => {
           showRecipe(response.data);
           setLoading(false);
-        }, 500); 
+        }, 500);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
   }, [id]);
-  
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-1">
       <BackButton />
@@ -69,7 +94,7 @@ const Recipes = () => {
             </div>
             {/* Actions */}
             <div className="flex flex-row items-center justify-evenly bg-slate-50 border border-gray-100 shadow-sm rounded md:col-span-1  sm:col-span-2">
-              <button className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
+              <button onClick={saveFile} className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
                 <span className="bg-persian-blue-100 p-2 rounded-full">
                   <PiArrowDownThin className="text-persian-blue-500 text-xl" />
                 </span>
@@ -90,26 +115,46 @@ const Recipes = () => {
             </div>
             {/* Recipe and Instructions */}
             <div className="rounded-lg col-span-1 sm:col-span-2">
-              <h2 className="text-md font-bold border-b py-2">
-                Recipe Ingredients
-              </h2>
-              <ul className="py-2 leading-8">
-                {recipe.ingredients &&
-                  recipe.ingredients.map((ingredient, index) => (
-                    <li key={index}>› {ingredient}</li>
-                  ))}
-              </ul>
-            </div>
-            <div className="rounded-lg p-1 col-span-1 sm:col-span-2">
-              <h2 className="text-md font-bold border-b py-2">
-                Cooking Instructions
-              </h2>
-              <ol className="p-2 list-decimal leading-8">
-                {recipe.instructions &&
-                  recipe.instructions.map((instruction, index) => (
-                    <li key={index}>{instruction}</li>
-                  ))}
-              </ol>
+              <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+                <Tab.List className="flex space-x-1 rounded-md bg-green-50">
+                  <Tab
+                    className={({ selected }) =>
+                      selected
+                        ? "w-full py-2.5 text-sm leading-5 font-medium text-black border-b-4 border-green-700"
+                        : "w-full py-2.5 text-sm leading-5 font-medium text-grey-50 "
+                    }
+                  >
+                    Ingredients
+                  </Tab>
+                  <Tab
+                    className={({ selected }) =>
+                      selected
+                        ? "w-full py-2.5 text-sm leading-5 font-medium text-black border-b-4 border-green-700"
+                        : "w-full py-2.5 text-sm leading-5 font-medium text-black "
+                    }
+                  >
+                    Instructions
+                  </Tab>
+                </Tab.List>
+                <Tab.Panels className="mt-2">
+                  <Tab.Panel className="p-3">
+                    <ul className="py-2 leading-8">
+                      {recipe.ingredients &&
+                        recipe.ingredients.map((ingredient, index) => (
+                          <li key={index}>› {ingredient}</li>
+                        ))}
+                    </ul>
+                  </Tab.Panel>
+                  <Tab.Panel className="p-3">
+                    <ol className="p-2 list-decimal leading-8">
+                      {recipe.instructions &&
+                        recipe.instructions.map((instruction, index) => (
+                          <li key={index}>{instruction}</li>
+                        ))}
+                    </ol>
+                  </Tab.Panel>
+                </Tab.Panels>
+              </Tab.Group>
             </div>
           </div>
         </>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { PiBookOpen } from "react-icons/pi";
 import BackButton from "../components/BackButton";
-import { PiSpinner } from "react-icons/pi";
+import Spinner from "../components/Spinner";
 
 const Dinner = () => {
   const [recipes, setRecipes] = useState([]);
@@ -35,7 +35,7 @@ const Dinner = () => {
     <div className="max-w-4xl mx-auto">
       <BackButton />
       {isLoading ? (
-        <PiSpinner className="text-4xl" />
+        <Spinner/>
       ) : (
         <div className="py-5">
           <h1 className="font-bold text-4xl">Dinner Recipes ({checkDinner.length})</h1>

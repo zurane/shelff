@@ -28,7 +28,7 @@ app.use(express.json());
 
 // Start the server
 app.get("/", (request, response) => {
-  return response.status(200).send("Hello World!");
+  return response.status(200).send("This is your server reporting live on port 3000!");
 });
 
 // Use the book router for all routes starting with /books
