@@ -15,11 +15,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes/details/:id" element={<Recipe />} />
-        <Route path="/catergory/dinner" element={<Dinner />} />
-        <Route path="/catergory/breakfast" element={<Breakfast />} />
-        <Route path="/catergory/snack" element={<Snacks />} />
-        <Route path="/catergory/dessert" element={<Dessert />} />
-        <Route path="/catergory/lunch" element={<Lunch />} />
+        <Route path="/category/dinner" element={<Dinner />} />
+        <Route path="/category/breakfast" element={<Breakfast />} />
+        <Route path="/category/snack" element={<Snacks />} />
+        <Route path="/category/dessert" element={<Dessert />} />
+        <Route path="/category/lunch" element={<Lunch />} />
       </Routes>
     </>
   );

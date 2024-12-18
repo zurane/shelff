@@ -8,6 +8,9 @@ import { PiMinusCircleThin } from "react-icons/pi";
 import EditBook from "./EditRecipe";
 import Tabs from "../components/Tabs";
 import Spinner from "../components/Spinner";
+import toast, { Toaster } from "react-hot-toast";
+
+
 
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
@@ -65,7 +68,8 @@ const Home = () => {
         console.log(response.data);
         // Now check if the given id is strictly equal to the id of the book
         // If it is not equal, then keep the book in the list.
-        showBooks(recipes.filter((recipe) => recipe._id !== id));
+        showBooks(recipes.filter((recipe) => recipe._id !== id));    
+        toast('item deleted');
       })
       .catch((error) => {
         console.log(error);
@@ -75,6 +79,7 @@ const Home = () => {
   return (
     <div className="max-w-4xl mx-auto my-2 py-4">
       <Tabs />
+      <Toaster/>
       <Navigation />
       {isLoading ? (
         <Spinner />
@@ -99,7 +104,7 @@ const Home = () => {
                       </span>
                     </div>
                   </Link>
-                  {/* actions container */}
+                  {/* actions */}
                   <div className="flex">
                     <span className="py-1 px-3 rounded">
                       <button onClick={() => handleOpen(recipe._id)}>

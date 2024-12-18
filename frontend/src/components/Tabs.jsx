@@ -19,7 +19,7 @@ const Tabs = () => {
       id: 0,
       label: "Lunch",
       bgColor: "bg-green-200",
-      path: "/catergory/lunch",
+      path: "/category/lunch",
       bgImg: bgLunch,
     },
     {
@@ -27,21 +27,21 @@ const Tabs = () => {
       label: "Dinner",
       bgColor: "bg-red-200",
       bgImg: bgDinner,
-      path: "/catergory/dinner",
+      path: "/category/dinner",
     },
     {
       id: 2,
       label: "Breakfast",
       bgColor: "bg-yellow-200",
       bgImg: bgBreakfast,
-      path: "/catergory/breakfast",
+      path: "/category/breakfast",
     },
 
     {
       id: 4,
       label: "Snack",
       bgColor: "bg-blue-200",
-      path: "/catergory/snack",
+      path: "/category/snack",
       bgImg: bgSnack,
     },
     {
@@ -49,7 +49,7 @@ const Tabs = () => {
       label: "Dessert",
       bgColor: "bg-pink-200",
       bgImg: bgDessert,
-      path: "/catergory/dessert",
+      path: "/category/dessert",
     },
   ];
 
@@ -92,7 +92,7 @@ const Tabs = () => {
           {tabs.map((tab) => (
             <Link to={tab.path} key={tab.id} className="px-1">
               <div
-                className={`${tab.bgColor} rounded-md shadow-md py-20 px-3 cursor-pointer`}
+                className={`${tab.bgColor} rounded-md shadow-md py-16 px-3 cursor-pointer`}
                 style={{
                   backgroundImage: tab.bgImg ? `url(${tab.bgImg})` : "none",
                   backgroundSize: "cover",
