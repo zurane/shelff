@@ -77,14 +77,14 @@ const Recipes = () => {
               {/* The recipe details are displayed in a grid layout */}
               <div className="grid grid-cols-2 py-3">
                 <div className="leading-3 border-r">
-                  <PiBowlSteamThin className="text-xl text-yellow-700" />
+                  <PiBowlSteamThin className="text-2xl text-yellow-700" />
                   <h5 className="font-bold text-sm">Category</h5>
                   <p className="text-md text-gray-700 py-2">
                     {recipe.category}
                   </p>
                 </div>
                 <div className="leading-3 pl-4">
-                  <PiAlarmThin className="text-xl text-green-700" />
+                  <PiAlarmThin className="text-2xl text-green-700" />
                   <h5 className="font-bold text-sm ">Cooking time</h5>
                   <p className="text-md text-gray-700 py-2">
                     {recipe.cookingTime} minutes
@@ -94,7 +94,10 @@ const Recipes = () => {
             </div>
             {/* Actions */}
             <div className="flex flex-row items-center justify-evenly bg-slate-50 border border-gray-100 shadow-sm rounded md:col-span-1  sm:col-span-2">
-              <button onClick={saveFile} className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center">
+              <button
+                onClick={saveFile}
+                className="text-gray px-3 py-2 rounded flex flex-col items-center justify-center"
+              >
                 <span className="bg-persian-blue-100 p-2 rounded-full">
                   <PiArrowDownThin className="text-persian-blue-500 text-xl" />
                 </span>
@@ -114,14 +117,17 @@ const Recipes = () => {
               </button>
             </div>
             {/* Recipe and Instructions */}
-            <div className="rounded-lg col-span-1 sm:col-span-2">
-              <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-                <Tab.List className="flex space-x-1 rounded-md bg-green-50">
+            <div className="rounded-lg col-span-1 sm:col-span-2 bg-white">
+              <Tab.Group
+                selectedIndex={selectedIndex}
+                onChange={setSelectedIndex}
+              >
+                <Tab.List className="flex space-x-1 rounded-md bg-slate-50">
                   <Tab
                     className={({ selected }) =>
                       selected
-                        ? "w-full py-2.5 text-sm leading-5 font-medium text-black border-b-4 border-green-700"
-                        : "w-full py-2.5 text-sm leading-5 font-medium text-grey-50 "
+                        ? "w-full py-2.5 text-sm leading-5 font-medium text-black border-b-2 border-green-700 bg-green-50 border-r"
+                        : "w-full py-2.5 text-sm leading-5 font-medium text-grey-50"
                     }
                   >
                     Ingredients
@@ -129,8 +135,8 @@ const Recipes = () => {
                   <Tab
                     className={({ selected }) =>
                       selected
-                        ? "w-full py-2.5 text-sm leading-5 font-medium text-black border-b-4 border-green-700"
-                        : "w-full py-2.5 text-sm leading-5 font-medium text-black "
+                        ? "w-full py-2.5 text-sm leading-5 font-medium text-black border-b-2 border-green-700 bg-green-50 border-l"
+                        : "w-full py-2.5 text-sm leading-5 font-medium text-black"
                     }
                   >
                     Instructions
@@ -146,7 +152,7 @@ const Recipes = () => {
                     </ul>
                   </Tab.Panel>
                   <Tab.Panel className="p-3">
-                    <ol className="p-2 list-decimal leading-8">
+                    <ol className="px-5 list-decimal leading-8">
                       {recipe.instructions &&
                         recipe.instructions.map((instruction, index) => (
                           <li key={index}>{instruction}</li>

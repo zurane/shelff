@@ -1,6 +1,8 @@
 import { PiPlusThin } from "react-icons/pi";
 import { useEffect, useState } from "react";
-import CreateBook from "../pages/CreateBook";
+import CreateRecipe from "../pages/CreateRecipe";
+
+
 const Navigation = () => {
   const [recipes, setRecipes] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -40,7 +42,7 @@ const Navigation = () => {
           </button>
         </span>
       </div>
-      {<CreateBook openModal={openModal} handleClose={handleClose} />}
+      {<CreateRecipe openModal={openModal} close={handleClose} />}
     </div>
   );
 };

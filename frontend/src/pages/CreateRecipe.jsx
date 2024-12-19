@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 
-const CreateBook = ({ openModal, close }) => {
+const CreateRecipe = ({ openModal, close }) => {
   const [recipe, setRecipe] = useState({
     title: "",
     ingredients: [],
@@ -150,4 +150,4 @@ const CreateBook = ({ openModal, close }) => {
   );
 };
 
-export default CreateBook;
+export default CreateRecipe;
