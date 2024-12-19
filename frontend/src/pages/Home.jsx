@@ -9,6 +9,7 @@ import EditBook from "./EditRecipe";
 import Tabs from "../components/Tabs";
 import Spinner from "../components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
+import DelModal from "../components/DelModal";
 
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
@@ -79,6 +80,8 @@ const Home = () => {
   };
 
   return (
+    <>
+    <DelModal />
     <div className="max-w-4xl mx-auto my-2 py-4">
       <Tabs />
       <Toaster position="bottom-center" />
@@ -136,6 +139,8 @@ const Home = () => {
         />
       )}
     </div>
+    
+    </>
   );
 
   // Define a function that will return the time ago
