@@ -10,17 +10,15 @@ import Tabs from "../components/Tabs";
 import Spinner from "../components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
 import DelModal from "../components/DelModal";
-
 // import { Link } from "react-router-dom";
 // import { AiOutlineEdit } from "react-icons/ai";
 // import { BsInfoCircle } from "react-icons/bs";
 // import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
- 
- 
   const handleOpen = (id) => {
     setSelectedRecipeId(id);
     setOpenModal(true);
@@ -29,6 +27,7 @@ const Home = () => {
     setOpenModal(false);
     setSelectedRecipeId(null);
   };
+
   // Define the state variables and the functions to update them
   // The state variables are recipes and isLoading
   // The functions to update the state variables are showBooks and setLoading respectively
@@ -62,6 +61,10 @@ const Home = () => {
       });
   }, []);
 
+  const handleDelete = (id) => {
+    setSelectedRecipeId(id);
+    setConfirmDelete(true);
+  };
   const deleteBook = (id) => {
     axios
       .delete(`http://localhost:3000/recipes/${id}`)
@@ -73,73 +76,79 @@ const Home = () => {
         toast.success("Item deleted successfully", {
           position: "bottom-center",
         });
+        setConfirmDelete(false);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const cancel = () => {
+    setConfirmDelete(false);
+  };
+
   return (
     <>
-    <DelModal />
-    <div className="max-w-4xl mx-auto my-2 py-4">
-      <Tabs />
-      <Toaster position="bottom-center" />
-      <Navigation />
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <div className="m-2">
-          <div>
-            {recipes.map((recipe) => (
-              <div key={recipe._id}>
-                <div className="flex flex-row items-center justify-between border-b ">
-                  <Link
-                    className="py-4 flex flex-row items-center gap-2"
-                    to={`/recipes/details/${recipe._id}`}
-                  >
-                    <PiBookOpen />
-                    <div className="leading-5">
-                      <span className="text-md font-semibold">
-                        {recipe.title}
-                        <br />
-                        <span className="text-xs text-gray-400 font-light">
-                          Added {timeAgo(new Date(recipe.createdAt))}
+      {confirmDelete && ( // If confirmDelete is true, render the DelModal component.
+        <DelModal delete={() => deleteBook(selectedRecipeId)} cancel={cancel} />
+      )}
+      <div className="max-w-4xl mx-auto my-2 py-4">
+        <Tabs />
+        <Toaster position="bottom-center" />
+        <Navigation />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <div className="m-2">
+            <div>
+              {recipes.map((recipe) => (
+                <div key={recipe._id}>
+                  <div className="flex flex-row items-center justify-between border-b ">
+                    <Link
+                      className="py-4 flex flex-row items-center gap-2"
+                      to={`/recipes/details/${recipe._id}`}
+                    >
+                      <PiBookOpen />
+                      <div className="leading-5">
+                        <span className="text-md font-semibold">
+                          {recipe.title}
+                          <br />
+                          <span className="text-xs text-gray-400 font-light">
+                            Added {timeAgo(new Date(recipe.createdAt))}
+                          </span>
                         </span>
+                      </div>
+                    </Link>
+                    {/* actions */}
+                    <div className="flex">
+                      <span className="py-1 px-3 rounded">
+                        <button onClick={() => handleOpen(recipe._id)}>
+                          <PiPencilSimpleLineThin className="text-lg" />
+                        </button>
+                      </span>
+                      <span className="py-1 px-3 rounded">
+                        <button
+                          onClick={() => handleDelete(recipe._id)}
+                          className="hover:text-red-500"
+                        >
+                          <PiMinusCircleThin className="text-lg" />
+                        </button>
                       </span>
                     </div>
-                  </Link>
-                  {/* actions */}
-                  <div className="flex">
-                    <span className="py-1 px-3 rounded">
-                      <button onClick={() => handleOpen(recipe._id)}>
-                        <PiPencilSimpleLineThin className="text-lg" />
-                      </button>
-                    </span>
-                    <span className="py-1 px-3 rounded">
-                      <button
-                        onClick={() => deleteBook(recipe._id)}
-                        className="hover:text-red-500"
-                      >
-                        <PiMinusCircleThin className="text-lg" />
-                      </button>
-                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-      {selectedRecipeId && (
-        <EditBook
-          open={openModal}
-          handleClose={handleClose}
-          bookId={selectedRecipeId}
-        />
-      )}
-    </div>
-    
+        )}
+        {selectedRecipeId && (
+          <EditBook
+            open={openModal}
+            handleClose={handleClose}
+            bookId={selectedRecipeId}
+          />
+        )}
+      </div>
     </>
   );
 
