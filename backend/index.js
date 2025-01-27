@@ -1,8 +1,11 @@
+// filepath: /c:/Users/mpho/shelff/backend/index.js
+import dotenv from 'dotenv';
+dotenv.config();
 import express from "express";
-import { PORT, MONGO_URL } from "./config.js";
 import mongoose from "mongoose";
 import bookRouter from "./routes/booksRoute.js";
 import cors from "cors";
+
 
 // Create the server
 const app = express();
@@ -31,20 +34,20 @@ app.get("/", (request, response) => {
   return response.status(200).send("This is your server reporting live on port 3000!");
 });
 
-// Use the book router for all routes starting with /books
-// The book router is responsible for managing the routes related to books.
+// Use the recipes router for all routes starting with /recipes
+// The recipes router is responsible for managing the routes related to recipes.
 app.use("/recipes", bookRouter);
 
 // Connect to the database
 mongoose
-  .connect(MONGO_URL)
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Connected to the database");
     // Start the server
-    app.listen(PORT, () => {
-      console.log("Server is running on port " + PORT);
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("Server is running on port " + process.env.PORT || 3000);
     });
   })
   .catch((error) => {
-    console.log(error);
+    console.log('Database connection error', error);
   });
