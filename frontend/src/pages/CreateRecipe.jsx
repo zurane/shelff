@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import propType from "prop-types";
 import {
   Modal,
   Box,
@@ -148,6 +149,11 @@ const CreateRecipe = ({ openModal, close }) => {
       </Box>
     </Modal>
   );
+};
+
+CreateRecipe.propTypes = {
+  openModal: propType.bool.isRequired,
+  close: propType.func.isRequired,
 };
 
 export default CreateRecipe;

@@ -1,13 +1,11 @@
 import express from "express";
 import { Recipe, Recipe as recipeModel } from "../models/recipeModel.js";
-
 // express router is responsible for managing the routes
 // and the middleware for the routes.
 // The express.Router class can be used to create modular, mountable route handlers.
 // A Router instance is a complete middleware and routing system.
 // A Router instance is often referred to as a “mini-app”.
 const router = express.Router();
-
 // Create a new recipe document
 router.post("/", async (request, response) => {
   try {
